@@ -1,0 +1,79 @@
+1     you should  not  watch  super long videos  because 
+            it is not effective to learn from  long 
+            tutorials 
+
+
+2      route  handling :   in  our  route we can do  many things : 
+                   1   fetch  data from database 
+                   2    load pages 
+                   3  return json
+                   4  full access to request and response
+3   middleware :   are functions that can access both request  and the response
+     
+4  https://dev.to/cassiocappellari/basic-concepts-of-node-js-pch
+this is the link to the  node tutorial 
+
+5 install  the nodemon :    install then change  the package.json and then just run dev 
+6    log is in the terminal
+7    node .js  modules
+8   you can also   display   html with  javascript and css that way 
+                          const path  = require('path')              // 
+                          app.use(express.static(path.join(__dirname ,  'public')))
+                          you have to create folder  called public  and put  html file there
+
+
+
+
+ 9      how to learn   node js  :
+                try   first w3 schools   and then   watch his video
+
+
+
+
+
+
+
+
+
+
+
+ /////////////////////////////////////////
+ CODE EXAMPLE
+
+
+
+
+ const  members =   require('./public/app')
+const express  =  require('express')     //    module usage
+const app  =   express();  
+const moment  =  require('moment')
+
+
+
+
+const path  = require('path')              // 
+app.use(express.static(path.join(__dirname ,  'public')))
+app.get('/api/members'  ,   (req , res)=>{
+    res.json(members)
+})
+app.get('/m'    ,   (req ,  res)=>{
+    res.send(`${moment().format()}`)
+})
+
+
+
+//middleWare
+const logger =  (req,  res ,  next)=>{
+    console.log('hello   middleware');
+    next()
+}
+app.use(logger)
+
+
+//     in this  example the res is the  our response 
+const PORT =process.env.PORT || 5000;       //  here   we listen to the port
+app.listen(PORT , ()=>{                     
+    console.log(`server is running on port  `  + PORT);
+});
+ 
+//////////////////////////////////////////////                                        
