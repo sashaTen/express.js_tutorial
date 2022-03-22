@@ -1,3 +1,67 @@
+NODE TUTORIAL 
+///////
+
+node  js   is the run  environment  that runs   outside of the browser 
+1 you dont have the access  to  browser  api  aka   no  dom  
+2 server side apps 
+3 versions 
+4  common js   is  used not the  es6
+5  but you can  access  network  system  and the operating   system
+6 how do  we get  node to evaluate  our code ?  
+                 :repl or  cli   
+
+
+//////////GLOBAL :
+in vanilla  you can work  with  the window object
+global definition :   anywhere  in your  application  you access them
+
+those  globals are   : 
+    1  __dirname   -  path to current directory 
+    2  __filename   -    fila name 
+    3  require   -   function to  use  modules 
+    4  module    -  info  about  current  module  or file  
+    5   procces    -  info about the  env the porgramm is   being executed 
+
+in  the file type the log(__dirname)  for example     
+=  '  node filename.js '   in the terminal
+
+
+also  we have setinterval  
+
+
+////////////////////////   MODULES 
+you do  execute   only one  file   but your code is splitted  in many files 
+so for that you need the modules
+
+in common   js every  file is the module 
+modules  are encapsulated pieces of code
+
+the idea  behind the object  that any  you  put into  global object
+'module'  you can  access  from  anywhere in the porgramm
+
+
+require()   -    means  import here the code from  wanted module
+you  also  can  export many  objects by  putting them  all into  the object 
+
+
+but the fucntion  is invoked  inside of the file than it becomes global even  if 
+you dont export it 
+it will  be executed if  you write require but you cant invoke it 
+it  will be run  automatically
+
+
+////////////////////////////BUILT IN   MODULES:
+OS 
+https
+FS 
+PATH 
+
+fs module  is the 'file system'
+
+
+const os  =  require('os')    ///  this is how do it without ./  in directory
+
+
 
 
 
