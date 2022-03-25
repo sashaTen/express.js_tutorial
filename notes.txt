@@ -61,8 +61,181 @@ fs module  is the 'file system'
 
 const os  =  require('os')    ///  this is how do it without ./  in directory
 
+//////////////////////////////////////////
+///////////////////////////////////////
+
+
+path  
+
+const   path  =  require('path');
+const filePath =   path.join('./content' ,  'subcontent' ,   'text.txt')
+log(filePath)
+
+
+console.log(path.basename(filePath));///    prints  just  the nmae of the file 
+we also  often  need to  provide  the absolute path 
+
+
+const path   =  require('path')
+console.log(path.sep);
+
+const filePath =   path.join('./content' ,  'subfolder' ,   'text.txt')
+console.log(filePath);
+
+console.log(path.basename(filePath));///    prints  just  the nmae of the file 
+const  absolute  =   path.resolve(__dirname)   //  dirname  shows  our current directory 
+console.log(absolute);
 
 
 
+ ////////////////   fs    
+ 
+const fs  =   require('fs')
+const  first  =   fs.readFileSync('./content/subfolder/firstTextFile.txt' ,   'utf8');//  two  params :  path  and  encoding 
+console.log(first);    //  this is   how you  can  read txt files 
+
+
+writefileSync   method   goes to specific  folder  and 
+if nothing  is there  it creates the file 
+and  if the file is there it overrides it 
+
+
+
+fs.writeFileSync('./content/subfolder/writtenfile.txt' ,    'this  is  written  file created  by  the writeFileSync  function ');
+
+
+
+now it is  time for async FS  methods: 
+   
+   const fs  =   require('fs')
+fs.readFile('./content/subfolder/text.txt' , (err ,   result)=>{
+if(err){
+    console.log(err);
+    return
+}
+console.log(result);
+})
+
+//it will not return  the text but the buffer
+//  because  we have to provide  'utf8'  between  path  and the callback
+
+
+
+/////////////////////////////////
+INTRODUCTION  TO  HTTP   
+//////////////////////////
+
+
+
+NPM :
+
+
+
+
+
+
+///////////////////////////////
+EVENT LOOP
+//////////////////////////
+
+
+we   run    immediate   tasks first   and  only then   the async  code 
+
+it  manages the  time  so  we  dont  wait long  operation's  end 
+and we   can  do  other  tasks  instead 
+while  event  loop   works with  the long lasting operation
+ 
+
+ const   fs   =   require('fs');
+fs.readFile('./content/subfolder/firstTextFile.txt' ,  'utf8',  (err   ,  result)=>{
+    //readfile is async  function 
+    if(err){
+        console.log(err);
+        return 
+
+    }
+    console.log(result);
+    console.log('we cmpleted reading the file');
+})
+
+console.log('next task');
+
+
+
+
+//   in  abover  ex   next  task  will  be  executed  first
+
+
+
+blocking  code for the async porgramm
+
+
+why  do we  even  need the async  code?
+   it is   because  some  code  might block  you programm  
+   and the whole sever  will  suffer from  const  fs  =   require('fs')
+
+const getText =  (path)=>{
+    return new Promise((resolve   , reject)=>{
+        fs.readFile(path,   'utf8'  ,  (error   , result)=>{
+            if(error){
+                reject(error)
+            }
+            else {
+                resolve(result)
+            }
+        }) 
+        
+    }
+    ) 
+}
+
+getText('./content/subfolder/firstTextFile.txt').then(result=>console.log(result)).catch(error=>console.log(error))
+it  and  not  only 
+   one url 
+   so that is  why you  nedd async  
+   so   it  does not wait  untill  that  blocking  long  programm to finish 
+   and start  running other  programms 
+
+
+
+
+
+
+
+or  another way  to  do  it is  to   use  async  await
+
+
+getText  is the  promise  abd instead  of that : 
+
+
+
+
+getText('./content/subfolder/firstTextFile.txt').then(result=>console.log(result)).catch(error=>console.log(error))
+
+
+try  that  async  await   method   : 
+  
+
+const  start  =  async()=>{
+    const  dat  =    await  getText('./8content/subfolder/firstTextFile.txt')
+     console.log(dat);   
+}
+
+
+start();
+
+
+//  in this  ex   getText  is the promise   and this  is  how async await  works  with  
+promises
+
+
+
+
+there is the module  that deals  with  proises  
+
+this  module is called utils
+
+
+3.08
 
 
