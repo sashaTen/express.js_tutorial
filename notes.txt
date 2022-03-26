@@ -239,3 +239,160 @@ this  module is called utils
 3.08
 
 
+
+
+const  util    =   require('util')
+const  fs  =   require('fs')
+
+const readFile =   util.promisify(fs.readFile)
+
+const  start  =  async()=>{
+    const  dat  =    await     readFile('./content/subfolder/firstTextFile.txt' ,  'utf8')
+    
+     console.log(dat);   
+}
+
+
+start();
+
+
+
+
+//////////////////////////////////
+EVENTS   
+//////////////////////////////////
+
+
+
+const  eventEmmiter =   require('events')    
+const   customEmitter =   new  eventEmmiter();//  we  first create the instance of the class 'events'
+//  on    
+//  emmit 
+//  are  two obbject  we are intersted the most
+
+customEmitter.on('response',  ()=>{           //   then   we invoke "on"  method
+    console.log('data  is recieved');
+})
+
+
+customEmitter.emit('response')              //   and then emit
+
+
+
+
+ ///  emit   means  we  can use whatever in   "on "   method
+ //   you  can  have as  many "on "    methods  as you want     
+ //   and  emitting   them you will invoke  all them
+ //   the order  matters :   
+                     1    we first "on"    and  only  then  we "emit "  it
+
+ //    we can  arguments   in   "emit "method
+    //  like  that:
+
+
+ customEmitter.on('response',  (  name  ,  age)=>{           //   then   we invoke "on"  method
+    console.log('data  is recieved');
+
+    console.log('the name is  '+   name    +   'and the age is '+   age);
+})
+
+
+customEmitter.emit('response')              //   and then emit
+customEmitter.emit('response' ,  "john" ,    34)
+
+
+
+
+const   http  =   require('http')
+const  server   =  http.createServer()
+server.on('request' ,   (req , res)=>{    //   when  server  is  on  you  can use event
+
+    res.end('hello    request   event')       //    request is the built in   event
+})
+
+
+server.listen(5000)
+
+
+
+//////////////////////////
+STREAMS
+//////////////////////////
+we have  4 types of streams  
+           :
+           writable
+           readable
+           duplex
+           transform
+
+
+
+
+           ////////////////////
+
+HOW  WEB   WORKS   ?   
+          /////////////////// 
+            evry  time   you  visit  url  you  do  kind  of the request 
+            and server    answers  to   request  with  response 
+            it is done  with http  protocol 
+
+
+
+
+
+
+
+//////////////////////////////http   basics
+
+const   http  =   require('http')
+const  server   =  http.createServer((req , res)=>{
+    ///   by  reaaching the 'req'   we  can access  all the information
+    about the  request
+
+
+    PORT  :
+        we  have  many PORTS
+        'end '  method  should  be  used  in  evry  response
+
+
+
+
+res.writeHead(200,  {'content-type' :  'html'})        // this is  hpw you can  pass the data 
+res.end('<h1>hello world </h1>')                       //   by  providing content-type  :   and the type  of data  that you want to send
+
+
+
+
+///HTTP    status code is just  number  to  say  you whether  it is successful  of not and thats it
+//   in response you have to provide the  status  code in case if you want to  let know about the network  status
+//  so if it s 404   the user will know that page was not found 
+//  by  reaching the  req  object  you  will know a lot of info  about the  request 
+
+
+
+
+const  server   =  http.createServer((req , res)=>{
+
+res.writeHead(200,  {'content-type' :  'html'})    
+const url   =   req.url;
+console.log(url);
+
+if (url==='/about'){
+res.end('thisis the about page')
+
+}
+if(url==='/contacts'){
+     res.writeHead(404)
+     res.end('page is not found 404 ')
+}
+})
+
+
+
+//  as well as you can  do  that manipulation 
+4.37
+
+
+
+
+
