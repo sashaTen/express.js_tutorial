@@ -396,3 +396,63 @@ if(url==='/contacts'){
 
 
 
+how  to render   an  html file in response   method in   http
+
+
+
+
+////////EXPRESSSSSS
+///////////////////
+main  methods  are : 
+                     1   get 
+                     2   post 
+                     3  put 
+                     4  listen 
+                     5   delete
+                     6   all
+                     7   use
+                     
+
+
+const express = require('express')
+const path  =    require('path')
+
+const app = express()
+app.use(express.static('./frontend'))
+
+
+
+
+
+app.listen(5000)
+//    methods in  expresss   are  kind  can get the callbacks 
+//get post  put delete manage   http
+//  use  is  responsible  for   middleware 
+//  the  order   matters  in   express 
+//  static   resources   :  
+//            we can use bu   using  'use '  nethod and  then 
+//            express  will import all the static files
+//  how to render  the html file :  
+                   //    we have to use path and 'join  '  method
+
+   //   static  file is the sort  of file that  server  does not have to change 
+   //other ways to  send the html  file is : 
+                              //   1    make  it  static
+                              //   2    use template  engine
+     //   we basically  use  express for  two  purposes   :  
+                                     //     1    setup  api
+                                     //     2    server side rendering     
+
+
+
+
+   //for  exmaple  api  is the interation via  the  'json'   
+   //  server  side  rendring  aka  ssr  is  used to render whole css and js  and html  files
+   //res.json   for   api   and re.render()  for   ssr
+   
+
+
+
+
+
+
