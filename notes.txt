@@ -453,6 +453,56 @@ app.listen(5000)
 
 
 
+////////////////////////////////////////////////////////
+
+///////////////////////////////////
+
+BASIC  API  CREATION
+//////////////////
+
+const express = require('express')
+const app = express()
+const  { products , people}=   require('./data.js')  //   imported  data from  another  file
+
+app.get('/' ,  (req , res)=>{
+    res.json([{firstName:  'Sasha'},  {lastName: 'Ten'}])    //   how to stringify  data and send as the json
+})
+
+app.get('/products' ,  (req,   res)=>{
+    res.json(products)                             //  we render  here   api of products
+})
+app.get('/people',  (req , res)=>{
+    res.json(people)                                  //  here  we   import api of people data
+})
+app.listen(5000)
+
+
+
+
+app.get('/products' ,  (req,   res)=>{
+    const newProducts =   products.map((item)=>{
+        const   { id  ,  name  ,    image} =   item;
+        return {id ,  name   ,  image};
+    })
+    res.json(newProducts)                             //  we render  here   api of products
+})
+app.get('/people',  (req , res)=>{
+    res.json(people)                                  //  here  we   import api of people data
+})
+
+
+//route  params 
+app.get('/products/:productId'  ,(req  , res)=>{
+    const  {productId}=     req.params;
+    const   singleProduct =   products.find((item)=>item.id===Number(productId))
+    if(!singleProduct){
+        return res.end('<h1>the product does  not  exist </h1>')
+    }
+    res.json(singleProduct)
+})
+
+
+/////////////////////////////
 
 
 
