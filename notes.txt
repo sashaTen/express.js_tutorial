@@ -504,5 +504,119 @@ app.get('/products/:productId'  ,(req  , res)=>{
 
 /////////////////////////////
 
+app.get('/api/v1/query' ,  (req,res)=>{               //  the  route
+ 
+    const  { search}   =      req.query;               //  two  variables
+    const  {limit } =     req.query;                    
+    let   sortedproducts   =   [ ...products];           
+
+    if(search){
+        sortedproducts  =  sortedproducts.filter((item)=>{ return    item.name.startsWith(search)})
+       // after  we  write in link  the query oblject we start filtering
+    }
+    if(limit){
+      sortedproducts =     sortedproducts.slice(0  ,  Number(limit))
+         //    in this  function  we just  want  to   retrict  the nunber of returned values
+    }
+
+
+
+    res.json(sortedproducts);    //   this is the respond 
+
+})
+
+
+//  if  we write in the link   http://localhost:5000/api/v1/query?search=a
+[
+{
+"id": 1,
+"name": "albany sofa",
+"image": "https://dl.airtable.com/.attachments/6ac7f7b55d505057317534722e5a9f03/9183491e/product-3.jpg",
+"price": 39.95,
+"desc": "I'm baby direct trade farm-to-table hell of, YOLO readymade raw denim venmo whatever organic gluten-free kitsch schlitz irony af flexitarian."
+},
+{
+"id": 3,
+"name": "albany sectional",
+"image": "https://dl.airtable.com/.attachments/05ecddf7ac8d581ecc3f7922415e7907/a4242abc/product-1.jpeg",
+"price": 10.99,
+"desc": "I'm baby direct trade farm-to-table hell of, YOLO readymade raw denim venmo whatever organic gluten-free kitsch schlitz irony af flexitarian."
+}
+]
+
+
+
+
+////  but if   it  has  the limit  of the 1    in  link   then   :   
+  link    :  http://localhost:5000/api/v1/query?search=a&limit=1
+  [
+{
+"id": 1,
+"name": "albany sofa",
+"image": "https://dl.airtable.com/.attachments/6ac7f7b55d505057317534722e5a9f03/9183491e/product-3.jpg",
+"price": 39.95,
+"desc": "I'm baby direct trade farm-to-table hell of, YOLO readymade raw denim venmo whatever organic gluten-free kitsch schlitz irony af flexitarian."
+}
+]
+
+
+
+
+
+
+
+
+
+////////////////////
+one route   can  only   have one  response
+so  if  you  hav  many conditions  instead of wrintign many  responses  
+you  can  use   'return's 4
+
+
+
+//////////////////////
+MIDDLEWARE
+////////////////////
+
+
+it is  in  the   middle of req   and res   that  is  why  it is called  MIDDLEWARE
+
+
+
+///  one  of  the usecases  for the MIDDLEWARE   is to    encapsulte  in them 
+the  repepetitie code
+
+
+// also   it is  good  prctice to  put  middleware  in  the separate  file 
+//     manually  addicng  the middleware  to  all routes  is  hard 
+the method to deal  with  that  problem exists
+this   method  is app.use()
+
+
+
+app.use(logger)
+//   app.use('/api'  ,  logger)    every  route  /  link   that starts with api in the begining will  use that logger  middleware
+app.use /////////////////////////////////////////////
+
+
+app.use(    [logger  ,   auth])  //    you can  use an  array of   middleares 
+
+/////////////////////////
+this is  how you  can  limit  hte access  to unauthorized  users
+const   auth  =(req  , res  ,   next)=>{
+    
+    const  {user}   =   req.query;
+    if(user==='sasha'){                      
+           console.log('congrats u  r  in system');
+           next();
+
+    }else   {
+        res.status(401).send('not allowed')
+    }
+
+
+    
+}
+
 
 
