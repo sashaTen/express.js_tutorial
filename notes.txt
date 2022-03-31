@@ -619,4 +619,46 @@ const   auth  =(req  , res  ,   next)=>{
 }
 
 
+////////////////////OTHER   HTTP   METHODS TO LIKE  POST  DELETE  OUT   GET  are
+WORKING WITH DATA IN  DATABASE
+
+/////////////
+
+POST 
+/////  in order  to  send  post  
+
+1    in front  end  form write  action =  '/path url'  and method= post   :
+
+
+              <form action="/login" method="POST">
+                <label for="name">First name:</label>
+                <input type="text" id="name" name="name"><br><br>
+             
+                <input type="submit" >
+              </form>
+
+2    app.use(express.static( '/filePath'))
+3    then use  built in   midddleware app.use(express.urlencoded(extended:  false))
+4    app.post('/login' , (req ,res)=>{
+    const  {name} =    req.body
+    res.rend('hello '+   name)
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
